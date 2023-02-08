@@ -1,5 +1,10 @@
-const capitalize = (text) => {
-  return text;
-}
+const capitalizeFirstChar = (text) => {
+  let capitalizedFirstLetter = text;
+  if (typeof text === "string") {
+    capitalizedFirstLetter = capitalizedFirstLetter.charAt(0).toUpperCase() + capitalizedFirstLetter.slice(1);
+  }
 
-export default capitalize;
+  return capitalizedFirstLetter;
+};
+
+export default capitalizeFirstChar;
