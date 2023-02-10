@@ -240,3 +240,87 @@ describe("Calculator subtract tests", () => {
     expect(calculator.subtract(1, -2, 3, -4)).toBe(4);
   });
 });
+
+describe("Calculator multiply tests", () => {
+  test("subtract(a, b) returns a * b", () => {
+    expect(calculator.multiply(2, 2)).toBe(4);
+  });
+
+  test("Handles string numbers (ints)", () => {
+    expect(calculator.multiply("1", 2)).toBe(2);
+  });
+
+  test("Handles string numbers (floats)", () => {
+    expect(calculator.multiply("1.5", 2)).toBe(3);
+  });
+
+  test("Handles negative numbers", () => {
+    expect(calculator.multiply(-3, 2)).toBe(-6);
+  });
+
+  test("Handles floats", () => {
+    expect(calculator.multiply(2.5, 2)).toBe(5);
+  });
+
+  test("Handles scientific notation", () => {
+    expect(calculator.multiply(2e3, 2e3)).toBe(4e6);
+  });
+
+  test("Handles scientific notation and regular numbers", () => {
+    expect(calculator.multiply(2e3, 100)).toBe(2e5);
+  });
+
+  test("Handles string scientific notation", () => {
+    expect(calculator.multiply("2e3", 2e3)).toBe(4e6);
+  });
+
+  test("Handles more than two numbers", () => {
+    expect(calculator.multiply(1, 2, 3, 4)).toBe(24);
+  });
+
+  test("Handles more than two numbers with different polarities", () => {
+    expect(calculator.multiply(1, -2, 3, -4)).toBe(24);
+  });
+});
+
+describe("Calculator divide tests", () => {
+  test("subtract(a, b) returns a / b", () => {
+    expect(calculator.divide(2, 2)).toBe(1);
+  });
+
+  test("Handles string numbers (ints)", () => {
+    expect(calculator.divide("1", 2)).toBe(0.5);
+  });
+
+  test("Handles string numbers (floats)", () => {
+    expect(calculator.divide("1.5", 2)).toBe(0.75);
+  });
+
+  test("Handles negative numbers", () => {
+    expect(calculator.divide(-3, 2)).toBe(-1.5);
+  });
+
+  test("Handles floats", () => {
+    expect(calculator.divide(2.5, 2)).toBe(1.25);
+  });
+
+  test("Handles scientific notation", () => {
+    expect(calculator.divide(2e3, 2e3)).toBe(1);
+  });
+
+  test("Handles scientific notation and regular numbers", () => {
+    expect(calculator.divide(2e3, 100)).toBe(20);
+  });
+
+  test("Handles string scientific notation", () => {
+    expect(calculator.divide("2e3", 2e3)).toBe(1);
+  });
+
+  test("Handles more than two numbers", () => {
+    expect(calculator.divide(1, 2, 3, 4)).toBe(0.04166667);
+  });
+
+  test("Handles more than two numbers with different polarities", () => {
+    expect(calculator.divide(1, -2, 3, -4)).toBe(0.04166667);
+  });
+});

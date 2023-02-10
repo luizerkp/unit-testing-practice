@@ -4,6 +4,8 @@ const error = {
   maxSafeIntValue: "At least one of your inputs is larger than Number.MAX_SAFE_INTERGER",
   minSafeIntValue: "At least one of your inputs is smaller than Number.MIN_SAFE_INTERGER",
 };
+const roundToDecimalPlaces = (value, decimalPlaces) =>
+  Number(`${Math.round(`${value}e${decimalPlaces}`)}e-${decimalPlaces}`);
 
 const isNumeric = (nums) =>
   nums.every(
@@ -95,7 +97,7 @@ const multiply = (...nums) => {
   const result = nums.reduce((total, current) => {
     const currentNumber = +current;
     let currentTotal = +total;
-    currentTotal -= currentNumber;
+    currentTotal *= currentNumber;
     return currentTotal;
   });
   return result;
@@ -103,11 +105,18 @@ const multiply = (...nums) => {
 
 const divide = (...nums) => {
   const valid = checkValidNumbers(nums);
-
+  const decimalPlaces = 8;
   if (valid.error) {
     throw new Error(valid.errorMessage);
   }
-  // TODO
+  const result = nums.reduce((total, current) => {
+    const currentNumber = +current;
+    let currentTotal = +total;
+    currentTotal /= currentNumber;
+    return currentTotal;
+  });
+
+  return roundToDecimalPlaces(result, decimalPlaces);
 };
 
 const calculator = {
@@ -119,5 +128,3 @@ const calculator = {
 };
 
 export default calculator;
-
-// console.log(calculator.add("a", 2));
