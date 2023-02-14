@@ -42,6 +42,12 @@ const checkValid = (arr) => {
   return valid;
 };
 
+const getAverage = (arr, len) => {
+  const total = len === 1 ? arr[0] : calculator.add(arr);
+  const average = calculator.divide(total, len);
+  return average;
+};
+
 const analyzeArray = (arr) => {
   const valid = checkValid(arr);
   if (valid.error) {
@@ -49,8 +55,7 @@ const analyzeArray = (arr) => {
   }
 
   const len = arr.length;
-  const total = len === 1 ? arr[0] : calculator.add(arr);
-  const average = calculator.divide(total, len);
+  const average = getAverage(arr, len);
   const min = findMin(arr);
   const max = findMax(arr);
 
