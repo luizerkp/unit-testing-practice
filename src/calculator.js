@@ -3,6 +3,7 @@ const error = {
   nonNumericValue: "At least one of your inputs contains a value that can not be converted to a number",
   maxSafeIntValue: "At least one of your inputs is larger than Number.MAX_SAFE_INTERGER",
   minSafeIntValue: "At least one of your inputs is smaller than Number.MIN_SAFE_INTERGER",
+  divisionByZero: "One of your divisors is zero and division by zero is undefined",
 };
 const roundToDecimalPlaces = (value, decimalPlaces) =>
   Number(`${Math.round(`${value}e${decimalPlaces}`)}e-${decimalPlaces}`);
@@ -32,7 +33,7 @@ const checkValidNumbers = (nums) => {
     errorMessage: "",
   };
 
-  if (nums.length === 1 || nums.some((num) => !num)) {
+  if (nums.length === 1) {
     valid.error = true;
     valid.errorMessage = error.onlyOneNumber;
     return valid;
@@ -58,62 +59,75 @@ const checkValidNumbers = (nums) => {
   return valid;
 };
 
+const checkSubArrays = (arr) => arr.some((value) => Array.isArray(value));
+const checkZeroDivisors = (arr) => arr.some((value) => parseFloat(value) === 0);
+
 const add = (...nums) => {
-  const valid = checkValidNumbers(nums);
+  // checks if an array or group of array were passed
+  const hasSubArrays = checkSubArrays(nums);
+  const numsArr = hasSubArrays ? nums.flat(Infinity) : nums;
+  const valid = checkValidNumbers(numsArr);
 
   if (valid.error) {
     throw new Error(valid.errorMessage);
   }
-  const result = nums.reduce((total, current) => {
+  const result = numsArr.reduce((total, current) => {
     const currentNumber = +current;
-    let currentTotal = +total;
-    currentTotal += currentNumber;
-    return currentTotal;
+    return +total + currentNumber;
   });
+
   return result;
 };
 
 const subtract = (...nums) => {
-  const valid = checkValidNumbers(nums);
+  // checks if an array or group of array were passed
+  const hasSubArrays = checkSubArrays(nums);
+  const numsArr = hasSubArrays ? nums.flat(Infinity) : nums;
+  const valid = checkValidNumbers(numsArr);
 
   if (valid.error) {
     throw new Error(valid.errorMessage);
   }
-  const result = nums.reduce((total, current) => {
+  const result = numsArr.reduce((total, current) => {
     const currentNumber = +current;
-    let currentTotal = +total;
-    currentTotal -= currentNumber;
-    return currentTotal;
+    return +total - currentNumber;
   });
+
   return result;
 };
 
 const multiply = (...nums) => {
-  const valid = checkValidNumbers(nums);
+  // checks if an array or group of array were passed
+  const hasSubArrays = checkSubArrays(nums);
+  const numsArr = hasSubArrays ? nums.flat(Infinity) : nums;
+  const valid = checkValidNumbers(numsArr);
 
   if (valid.error) {
     throw new Error(valid.errorMessage);
   }
-  const result = nums.reduce((total, current) => {
+  const result = numsArr.reduce((total, current) => {
     const currentNumber = +current;
-    let currentTotal = +total;
-    currentTotal *= currentNumber;
-    return currentTotal;
+    return +total * currentNumber;
   });
+
   return result;
 };
 
 const divide = (...nums) => {
-  const valid = checkValidNumbers(nums);
+  // checks if an array or group of array were passed
+  const hasSubArrays = checkSubArrays(nums);
+  const numsArr = hasSubArrays ? nums.flat(Infinity) : nums;
+  const valid = checkValidNumbers(numsArr);
   const decimalPlaces = 8;
-  if (valid.error) {
-    throw new Error(valid.errorMessage);
+  const contaisZeroDivisor = checkZeroDivisors(numsArr.slice(1));
+
+  if (valid.error || contaisZeroDivisor) {
+    const errorMessage = valid.error ? valid.errorMessage : error.divisionByZero;
+    throw new Error(errorMessage);
   }
-  const result = nums.reduce((total, current) => {
+  const result = numsArr.reduce((total, current) => {
     const currentNumber = +current;
-    let currentTotal = +total;
-    currentTotal /= currentNumber;
-    return currentTotal;
+    return +total / currentNumber;
   });
 
   return roundToDecimalPlaces(result, decimalPlaces);
