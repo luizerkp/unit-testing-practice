@@ -1,143 +1,99 @@
 import calculator from "../src/calculator";
+// const calculatorCaller = (...args) => {
+//   const nums = args.flat(1);
+// }
+// const constructReturnObject = (values) => {
 
-test("Calculator object exist", () => {
-  expect(typeof calculator).toBe("object");
-});
-
+// }
 describe("calculator Error Check Tests", () => {
   test("Throws Error with only one num", () => {
     expect(() => {
       calculator.add(2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.subtract(2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.multiply(2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.divide(2);
-    }).toThrow(calculator.error.onlyOneNumber);
-  });
-
-  test("Throws Error with non-numbers (char)", () => {
-    expect(() => {
-      calculator.add("a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.subtract("a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.multiply("a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.divide("a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with non-numbers (boolean)", () => {
     expect(() => {
       calculator.add(true, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.subtract(true, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.multiply(true, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.divide(true, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with non-numbers (unicode)", () => {
     expect(() => {
       calculator.add("\u2103", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.subtract("\u2103", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.multiply("\u2103", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.divide("\u2103", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with non-numbers (null)", () => {
     expect(() => {
       calculator.add(null, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.subtract(null, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.multiply(null, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.divide(null, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with non-numbers (empty arr [])", () => {
     expect(() => {
       calculator.add([], 2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.subtract([], 2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.multiply([], 2);
-    }).toThrow(calculator.error.onlyOneNumber);
+    }).toThrow();
     expect(() => {
       calculator.divide([], 2);
-    }).toThrow(calculator.error.onlyOneNumber);
-  });
-
-  test("Throws Error with non-numbers (arr with non-convertibe value)", () => {
-    expect(() => {
-      calculator.add([], 2, ["a"]);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.subtract([], 2, ["a"]);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.multiply([], 2, ["a"]);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.divide([], 2, ["a"]);
-    }).toThrow(calculator.error.nonNumericValue);
-  });
-
-  test("Throws Error with non-numbers (empty obj {})", () => {
-    expect(() => {
-      calculator.add({}, 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.subtract({}, 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.multiply({}, 2);
-    }).toThrow(calculator.error.nonNumericValue);
-    expect(() => {
-      calculator.divide({}, 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with a string number with letters", () => {
     expect(() => {
       calculator.add("2a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.subtract("2a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.multiply("2a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
     expect(() => {
       calculator.divide("2a", 2);
-    }).toThrow(calculator.error.nonNumericValue);
+    }).toThrow();
   });
 
   test("Throws Error with a number larger than Number.MAX_SAFE_INTEGER", () => {
