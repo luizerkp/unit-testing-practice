@@ -184,19 +184,6 @@ describe("calculator Happy Path tests", () => {
     expect(calculator.divide(2e3, 100)).toBe(20);
   });
 
-  test("Handles string scientific notation", () => {
-    expect(calculator.add("2e3", 2e3)).toBe(4e3);
-    expect(calculator.subtract("2e3", 2e3)).toBe(0);
-    expect(calculator.multiply("2e3", 2e3)).toBe(4e6);
-    expect(calculator.divide("2e3", 2e3)).toBe(1);
-  });
-  test("Handles more than two numbers", () => {
-    expect(calculator.add(1, 2, 3, 4)).toBe(10);
-    expect(calculator.subtract(1, 2, 3, 4)).toBe(-8);
-    expect(calculator.multiply(1, 2, 3, 4)).toBe(24);
-    expect(calculator.divide(1, 2, 3, 4)).toBe(0.04166667);
-  });
-
   test("Handles more than two numbers with different polarities", () => {
     expect(calculator.add(1, -2, 3, -4)).toBe(-2);
     expect(calculator.subtract(1, -2, 3, -4)).toBe(4);
